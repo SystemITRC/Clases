@@ -1,0 +1,170 @@
+Productos = {
+    "LUCO":12000,
+    "ITALIANO":14000,
+    "CHACARERO":17000,
+    "COMPLETO":18000,
+}
+
+Carrito = {}
+for i,v in Productos.items():
+    Carrito[i] = 0
+
+Descuentos = {
+    "DIURNO":15,
+    "VESPERTINO":12,
+    "ADMINISTRATIVO":0,
+    "OTRO":0
+}
+
+CN = 0
+
+def ShowMenu():
+    print("\n\nPRODUCTOS\t\t\t|| Precio")
+    global CN
+    n = 0
+    for i, v in Productos.items():
+        n += 1
+        if len(i) >= 15:
+            print(f"{n}- {i[:12].ljust(15, '.')}\t\t|| ${v}")
+        else:
+            print(f"{n}- {i.ljust(15, ' ')}\t\t|| ${v}")
+    CN = n
+
+def ShowDescuentos():
+    print("\n\nCARGOS")
+    global CN
+    n = 0
+    for i,v in Descuentos.items():
+        n += 1
+        print(f"{n}- {i}")
+    CN = n
+
+def error(msg):
+    print("\033[4;31m"+msg+"\033[0m")
+
+def success(msg):
+    print("\033[4;32m"+msg+"\033[0m")
+
+Paso = 0
+Pago_Total = 0
+Pago_SubTotal = 0
+Descuento_Aplicado = 0
+CantidadEnCarrito = 0
+
+Finalizado = False
+Cancelado = False
+
+while not Finalizado:
+    Clave = None
+    Valor = None
+    Indice = None
+    Cantidad = 0
+    Eleccion = ""
+    if Paso == 0: #elegir productos
+        ShowMenu()
+        print(f"{CN+1}- Siguiente\n{CN+2}- Salir\n{CN+3}- Anular")
+        Eleccion = input("Elija una opcion: ").upper()
+        if Eleccion.isdigit() and int(Eleccion) <= CN:
+            Indice = int(Eleccion)-1
+            if 0<=Indice<len(Productos):
+                Clave = list(Productos.keys())[Indice]
+                Valor = Productos[Clave]
+                try:
+                    Cantidad = int(input("Ingrese la cantidad: "))
+                    if Cantidad > 0:
+                        Pago_Total += Valor*Cantidad
+                        CantidadEnCarrito += 1
+                        Carrito[Clave] += Cantidad
+                        success((str(Cantidad)+" "+str(Clave)+" agregado al carrito."))
+                    else:
+                        error("La cantidad debe ser mayor a 1. Volviendo al menu principal.")
+                except:
+                    error("Error inesperado. Volviendo al menu principal.")
+            else:
+                error("Opcion invalida")
+        elif Eleccion in Productos:
+            Valor = Productos[Eleccion]
+            try:
+                Cantidad = int(input("Ingrese la cantidad: "))
+                if Cantidad > 0:
+                    Pago_Total += Valor*Cantidad
+                    CantidadEnCarrito += 1
+                    Carrito[Eleccion] += Cantidad
+                    success((str(Cantidad)+" "+str(Eleccion)+" agregado al carrito."))
+                else:
+                    error("La cantidad debe ser mayor a 1. Volviendo al menu principal.")
+            except:
+                error("Error inesperado. Volviendo al menu principal.")
+        elif Eleccion == "SIGUIENTE" or Eleccion == str(CN+1):
+            if CantidadEnCarrito > 0:
+                Paso += 1
+            else:
+                error("Aun no agregas nada al carrito.")
+        elif Eleccion == "SALIR" or Eleccion == str(CN+2):
+            Cancelado = True
+            Finalizado = True
+        elif Eleccion == "ANULAR" or Eleccion == str(CN+3):
+            Pago_Total = 0
+            CantidadEnCarrito = 0
+            for i,v in Productos.items():
+                Carrito[i] = 0
+            success("Compra anulada, el carrito esta vacio.")
+        else:
+            error("Opcion invalidad")
+    elif Paso == 1: #Elegir descuentos
+        ShowDescuentos()
+        print(f"{CN+1}- Salir\n{CN+2}- Volver")
+        Eleccion = input("Ingrese su cargo: ").upper()
+        if Eleccion.isdigit() and int(Eleccion) <= CN:
+            Indice = int(Eleccion)-1
+            if 0<=Indice<len(Descuentos):
+                Clave = list(Descuentos.keys())[Indice]
+                Descuento_Aplicado = Descuentos[Clave]
+                Paso += 1
+            else:
+                error("Opcion invalida.")
+        elif Eleccion in Descuentos:
+            Descuento_Aplicado = Descuentos[Eleccion]
+            Paso += 1
+        elif Eleccion == "SALIR" or Eleccion == str(CN+1):
+            Cancelado = True
+            Finalizado = True
+        elif Eleccion == "VOLVER" or Eleccion == str(CN+2):
+            Paso -= 1
+        else:
+            error("Opcion invalida.")
+    elif Paso == 2: #Confirmar compra
+        Eleccion = input("\n\nCONFIRMACION\n1- Confirmar\n2- Salir\n3- Volver\nElija una opcion: ").upper()
+        if Eleccion == "1" or Eleccion == "CONFIRMAR":
+            Finalizado = True
+        elif Eleccion == "2" or Eleccion == "SALIR":
+            Cancelado = True
+            Finalizado = True
+        elif Eleccion == "3" or Eleccion == "VOLVER":
+            Paso -= 1
+        else:
+            error("Opcion invalida.")
+
+if not Cancelado:
+    #Calculos
+    Pago_SubTotal = Pago_Total
+    Pago_Total *= (1-Descuento_Aplicado/100)
+    Descontado = Pago_SubTotal-Pago_Total
+    #Boleta
+    print("\n\n\n\n            Churrascos DC            ")
+    print("---------------------------------------")
+    for i,v in Carrito.items():
+        if v>0:
+            if len(i) >= 6:
+                print(f"{v} {i}\t\t\t ${Productos[i]*v}")
+            else:
+                print(f"{v} {i}\t\t\t\t ${Productos[i]*v}")
+    print("---------------------------------------")
+    print(f"Sub-Total\t\t\t${Pago_SubTotal}")
+    if Descuento_Aplicado > 0:
+        print(f"Descuento  {Descuento_Aplicado}%\t\t\t${Descontado}")
+    print("---------------------------------------")
+    print(f"Total a pagar\t\t${Pago_Total}")
+    print("\n         Gracias por su compra!        ")
+else:
+    success("Compra cancelada de forma exitosa.")
