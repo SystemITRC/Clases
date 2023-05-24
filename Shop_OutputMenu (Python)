@@ -155,10 +155,10 @@ if not Cancelado:
     print("---------------------------------------")
     for i,v in Carrito.items():
         if v>0:
-            if len(i) >= 6:
-                print(f"{v} {i}\t\t\t ${Productos[i]*v}")
+            if len(i) >= 15:
+                print(f"{v} {i[:12].ljust(15, '.')}\t\t${Productos[i]*v}")
             else:
-                print(f"{v} {i}\t\t\t\t ${Productos[i]*v}")
+                print(f"{v} {i.ljust(15, ' ')}\t\t${Productos[i]*v}")
     print("---------------------------------------")
     print(f"Sub-Total\t\t\t${Pago_SubTotal}")
     if Descuento_Aplicado > 0:
