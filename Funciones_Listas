@@ -1,0 +1,45 @@
+#####################
+##    LISTAS PY    ##
+#####################
+
+#Listas Unidimensionales
+LISTA_0 = [] #Lista vacia
+LISTA_1 = [1,2,3,4,5] #Lista con valores numericos
+LISTA_2 = ["A","B","C","D","E"] #Lista con valores str
+LISTA_3 = ["A","B",3,4,"E"] #Lista con valores numericos y str
+ListaU_Ejemplo = ["Itamar", "Kim", "System", "Deity"]
+#Listas bidimensionales
+
+LISTAB_0 = [[],[],[]] #Lista bidimensional vacia
+LISTAB_1 = [[1,2,3],["A","B","C"],[7,8,9]] #Lista bidimensional con valores
+ListaB_Ejemplo = [["Itamar","Kim","System","Deity"],[18,19,19,18],["Alto","Bajo","Gordo","Flaco"]]
+
+#Listas tridimensionales
+LISTAT_0 = [[[],[],[]],[[],[],[]],[[],[],[]]] #lista tridimensional vacia
+LISTAT_1 = [[[1,2,3],[4,5,6],[7,8,9],],[["A","B","C"],["D","F","G"],["H","I","J"],],[["A","B",3],[4,"E",6],[7,8,"J"]]] #lista tridimensional con valores
+
+####################################################################################
+####################################################################################
+                        #FUNCIONES PARA LAS LISTAS
+                                #EN PYTHON
+####################################################################################
+####################################################################################
+
+#Unidimensionales
+Valor_U1 = 15
+LISTA_0.append(Valor_U1) #Ingresa un al final de la lista.
+LISTA_0.pop() #Elimina el valor del (indice), si no ingresa un valor entonces eliminara el ultimo de la lista.
+LISTA_0.insert(0,10) #Ingresa un valor en un indice especifico (indice, valor).
+LISTA_0.count(10) #Cuenta y devuelve la cantidad de veces que un (valor) esta en la lista.
+Copia = LISTA_0.copy() #Copia la lista y la guarda en una nueva variable.
+Concatenada = LISTA_0+Copia #Concatena las listas y las guarda en una nueva variable.
+LISTA_0.extend(Copia) #Extiende la lista con valores de otra lista.
+LISTA_0.index(10) #encuentra el indice del primer (valor) que encuentre.
+LISTA_0.remove(10) #remueve un (valor) especifico en la lista, solo uno.
+del LISTA_0[0] #remueve un valor de la lista desde su [indice].
+VL_0 = 10 in LISTA_0 #devuelve un valor booleano si un valor esta o no en una lista.
+LISTA_0.sort() #ordena la lista de forma ascendente.
+LISTA_0.sort(reverse=True) #ordena la lista de forma descendiente.
+LISTA_0.reverse() #invierte los valores de una lista
+len(LISTA_0) #Cuenta y devuelve la cantidad de valores dentro de la lista.
+LISTA_0.clear() #elimina todos los valores de una lista
