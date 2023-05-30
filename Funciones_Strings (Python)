@@ -1,0 +1,71 @@
+#####################
+##    STRING PY    ##
+#####################
+
+String = "  mEnsaJe DE. prueba prueba 1  "
+Palabra = "PRUEBA"
+StringN = "1"
+StringI = "Nombre_ID"
+
+# |     v = "Metodo 1".upper()
+# |     v = str.upper("Metodo 2")
+# |     v = "Metodo 3"
+# |     print(v.upper())
+
+print(f"String Original:\t\t{String}")
+#CAPITALIZE() Deja solo el primer caracter como mayuscula
+print(f"Ejemplo de capitalize():\t{String.capitalize()}")
+
+#lower() convertira todo a minuscula siguiendo las normas del sistema operativo
+print(f"Ejemplo de lower():\t\t{String.lower()}")
+#casefold() convertira todo a minuscula, de forma más agresiva con caracteres especiales de otros idiomas
+print(f"Ejemplo de casefold():\t\t{String.casefold()}")
+
+#upper() convertira todo a mayúscula
+print(f"Ejemplo de upper():\t\t{String.upper()}")
+
+#title() convierte la primera letra de TODAS las palabras a mayuscula
+print(f"Ejemplo de title():\t\t{String.title()}")
+
+#swapcase() invierte la capitalizacion.
+print(f"Ejemplo de swapcase:\t\t{String.swapcase()}")
+
+#lstrip() corta los espacios vacios a la izquierda del texto
+print(f"Ejemplo de lstrip():\t\t{String.lstrip()}")
+
+#rstrip() corta los espacios vacios a la derecha del texto
+print(f"Ejemplo de rstrip():\t\t{String.rstrip()}")
+
+#strip() corta los espacios vacios a la izquieda y derecha del texto
+print(f"Ejemplo de strip():\t\t{String.strip()}")
+
+#replace() remplaza un texto por otro dentro del string
+print(f"Ejemplo de replace() 1:\t\t{String.replace('Prue', 'IDK')}")
+print(f"Ejemplo de replace() 2:\t\t{String.replace('prue', 'IDK')}")
+
+#count() cuenta la cantidad de veces que aparece una palabra
+print(f"Ejemplo de count() 1:\t\t{String.count(Palabra)}")
+print(f"Ejemplo de count() 2:\t\t{String.upper().count(Palabra)}")
+
+#len() cuenta los caracteres
+print(f"Ejemplo de len():\t\t{len(String)}")
+
+#startswith() revisa si el string inicia con cierta palabra o caracteres
+print(f"Ejemplo de startswith() 1:\t{String.startswith('Men')}")
+print(f"Ejemplo de startswith() 2:\t{String.startswith('mEn')}")
+
+#endswith() revisa si el string terminca con cierta palabra o caracteres
+print(f"Ejemplo de endswith() 1:\t{String.endswith('1')}")
+print(f"Ejemplo de endswith() 2:\t{String.endswith('2')}")
+
+#find() revisa si existe un texto especifico dentro del string
+print(f"Ejemplo de find() 1:\t\t{String.find('Prueba Prueba')}")
+print(f"Ejemplo de find() 2:\t\t{String.find('prueba prueba')}")
+
+#isdigit() revisa si el string es un numero int
+print(f"Ejemplo de isdigit() 1:\t\t{String.isdigit()}")
+print(f"Ejemplo de isdigit() 2:\t\t{StringN.isdigit()}")
+
+#isidentifier() revisa si es un identificador
+print(f"Ejemplo de isidentifier() 1:\t{String.isidentifier()}")
+print(f"Ejemplo de isidentifier() 2:\t{StringI.isidentifier()}")
